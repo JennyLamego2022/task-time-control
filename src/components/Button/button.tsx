@@ -1,7 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import style from './button.module.scss'
 
-class Button extends React.Component {
+
+interface ButtonProps {
+  children: ReactNode;
+}
+class Button extends React.Component <ButtonProps> {
   render() {
     //CSS inline no html
     // const estaAtivo = false;
@@ -14,7 +18,7 @@ class Button extends React.Component {
 
     return (
     <button className={style.botao}>
-        Botão
+        {this.props.children}
     </button>);
   }
 }
