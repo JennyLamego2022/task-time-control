@@ -20,7 +20,7 @@ function App() {
 // }
 ])
 
-const [select, setSelected] = useState<ITask>();
+const [selected, setSelected] = useState<ITask>();
 
 function selectedTask(selectedTask: ITask){
   setSelected(selectedTask);
@@ -38,7 +38,7 @@ function selectedTask(selectedTask: ITask){
         task={task}
         selectedTask={selectedTask}
         />
-        <Stopwatch  />
+        <Stopwatch selected={selected} />
       </div>
     </>
   );
