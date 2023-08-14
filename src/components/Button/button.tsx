@@ -2,8 +2,9 @@ import React, { ReactNode } from "react";
 import style from './button.module.scss'
 
 
-interface ButtonProps {
+interface ButtonProps  {
   children: ReactNode;
+  type?: "button" | "submit" | "reset" | undefined
 }
 class Button extends React.Component <ButtonProps> {
   render() {
@@ -15,9 +16,9 @@ class Button extends React.Component <ButtonProps> {
     //cria uma constante booleana 
     //le-se: se esta ativo, (como nao tem como usar o if, pq estamos em um objeto, usa-se o ternario '?') bg green, senao (:) bg red.
     //uma forma de criar o inline style no html
-
+    const {type = "button"} = this.props;
     return (
-    <button className={style.botao}>
+    <button type={type} className={style.botao}>
         {this.props.children}
     </button>);
   }
