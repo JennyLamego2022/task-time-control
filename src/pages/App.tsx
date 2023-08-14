@@ -20,13 +20,25 @@ function App() {
 // }
 ])
 
+const [select, setSelected] = useState<ITask>();
+
+function selectedTask(selectedTask: ITask){
+  setSelected(selectedTask);
+  setTask(oldTask => oldTask.map(task => ({
+    ...task,
+    selected: task.id === selectedTask.id ? true : false
+  })))
+}
 
   return (
     <>
       <div className={style.AppStyle}>
         <Form setTask={setTask}/>
-        <List task={task}/>
-        <Stopwatch/>
+        <List 
+        task={task}
+        selectedTask={selectedTask}
+        />
+        <Stopwatch  />
       </div>
     </>
   );

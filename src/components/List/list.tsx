@@ -2,15 +2,20 @@ import { ITask } from '../../types/task';
 import Item from './Item/item';
 import style from './list.module.scss'
 
+interface Props {
+  task: ITask[],
+  selectedTask: (selectedTask: ITask) => void
+}
 
-function List({task}:{task: ITask[]}) {
+function List({task, selectedTask}: Props) {
   return (
     <aside className={style.listaTarefas}>
       <h2>Tarefas do dia</h2>
       <ul>
-        {task.map((item, index) => (
+        {task.map((item) => (
           <Item
-          key={index}
+          selectedTask={selectedTask}
+          key={item.id}
            {...item}
           />
         ))}
