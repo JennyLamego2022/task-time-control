@@ -29,6 +29,7 @@ function Form({setTask} : Props){
       setTaskState('');
       setTime("00:00");
   }
+  
   return(
     <form action="" className={style.novaTarefa} onSubmit={addTask}>
         <div className={style.inputContainer}>
