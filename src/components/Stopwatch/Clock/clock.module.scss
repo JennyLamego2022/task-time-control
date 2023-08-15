@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
   
-    @media screen and (min-width:1280px) {
+    @media screen and (min-width:1024px) {
       height: 10.8rem;
       width: 9rem;
     }
@@ -18,9 +18,11 @@
   .relogioDivisao {
     height: 4.2rem;
     display: flex;
-    align-items: flex-end;
+    align-items: end;
+    justify-content: center;
   
-    @media screen and (min-width:1280px) {
+    @media screen and (min-width:1024px) {
       height: 12.6rem;
+      width: 100%;
     }
   }
