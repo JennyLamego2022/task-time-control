@@ -1,49 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Button/button";
 import style from './form.module.scss'
 import { ITask } from "../../types/task";
 import { v4 as uuidv4 } from "uuid"
 
-class Form extends React.Component<{
+interface Props{
   setTask: React.Dispatch<React.SetStateAction<ITask[]>>
-}> {
+}
 
-  state = {
-    task: "",
-    time: "00:00"
-  }
+function Form({setTask} : Props){
+  const [task, setTaskState] = useState("")
+  const [time, setTime] = useState("00:00")
 
-  addTask(evento: React.FormEvent<HTMLFormElement>){
+  function addTask(evento: React.FormEvent<HTMLFormElement>){
     evento.preventDefault();
-    this.props.setTask(oldTask => 
+    setTask(oldTask => 
       [
         ...oldTask,
         {
-          ...this.state,
+          task,
+          time,
           selected:false,
           completed:false, 
           id:uuidv4()
         }
       ]
-    )
-
-    this.setState({
-      task: "",
-      time: "00:00"
-    })
+    );
+      setTaskState('');
+      setTime("00:00");
   }
-
-  render(): React.ReactNode {
-    return (
-      <form action="" className={style.novaTarefa} onSubmit={this.addTask.bind(this)}>
+  return(
+    <form action="" className={style.novaTarefa} onSubmit={addTask}>
         <div className={style.inputContainer}>
           <label htmlFor="task">Adicione uma nova tarefa</label>
           <input
             type="text"
             name="task"
             id="task"
-            value = {this.state.task}
-            onChange={evento => this.setState({...this.state, task: evento.target.value})}
+            value = {task}
+            onChange={evento => setTaskState(evento.target.value)}
             placeholder="Qual tarefa vai executar?"
             required
           />
@@ -54,8 +49,8 @@ class Form extends React.Component<{
             type="time"
             step="1"
             name="time"
-            value = {this.state.time}
-            onChange={evento => this.setState({...this.state, time: evento.target.value})}
+            value = {time}
+            onChange={evento => setTime(evento.target.value)}
             id="time"
             min="00:00:00"
             max="01:30:00"
@@ -64,8 +59,7 @@ class Form extends React.Component<{
         </div >
         <Button type="submit">Adicionar</Button>
       </form>
-    );
-  }
+  )
 }
 
 export default Form;
