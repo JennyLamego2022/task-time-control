@@ -17,3 +17,8 @@ class Button1 extends React.Component <ButtonProps> {
 }
 
 export default Button;
+
+
+Proximas Tarefas:
+Botao de Stop
+Botão para apagar a tarefa feita;
