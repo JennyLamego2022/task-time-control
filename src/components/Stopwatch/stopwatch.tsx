@@ -6,10 +6,11 @@ import style from './stopwatch.module.scss'
 import timeForSecond from "../../common/utils/time";
 
 interface Props {
-    selected: ITask | undefined
+    selected: ITask | undefined,
+    finishTask: () => void
 }
 
-export default function Stopwatch({ selected }: Props) {
+export default function Stopwatch({ selected, finishTask  }: Props) {
     const [time, setTime] = useState<number>();
 
     useEffect(() => {
@@ -18,14 +19,24 @@ export default function Stopwatch({ selected }: Props) {
         }
     }, [selected])
 
+    function regressive(contador: number = 0){
+        setTimeout(() => {
+            if( contador > 0){
+                setTime(contador - 1);
+                return regressive(contador -1);
+            }
+            finishTask();
+            
+        }, 1000)
+    }
+
     return(
         <div className={style.cronometro}>
             <p className={style.titulo}>Escolha um card e inicie o cronômetro</p>
-            Tempo:{time} minutos
             <div className={style.relogioWrapper}>
-                <Clock/>
+                <Clock time={time}/>
             </div>
-            <Button>Começar!</Button>
+            <Button onClick ={() => regressive(time) }>Começar!</Button>
         </div>
     )
 }

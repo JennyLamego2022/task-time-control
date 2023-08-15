@@ -30,6 +30,22 @@ function selectedTask(selectedTask: ITask){
   })))
 }
 
+function finishTask(){
+  if(selected){
+    setSelected(undefined)
+    setTask(oldTask => oldTask.map(task => {
+      if(task.id === selected.id){
+        return{
+          ...task,
+          selected:false,
+          completed:true
+        }
+      }
+      return task;
+    }))
+  }
+}
+
   return (
     <>
       <div className={style.AppStyle}>
@@ -38,7 +54,10 @@ function selectedTask(selectedTask: ITask){
         task={task}
         selectedTask={selectedTask}
         />
-        <Stopwatch selected={selected} />
+        <Stopwatch 
+        selected={selected}
+        finishTask={finishTask}
+        />
       </div>
     </>
   );
